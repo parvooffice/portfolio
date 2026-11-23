@@ -588,7 +588,7 @@ ${s('t-cyan', 'Role')}:      Aspiring AI Engineer
 ${s('t-cyan', 'Campus')}:    VIT Vellore
 ${s('t-cyan', 'Cloud')}:     AWS
 ${s('t-cyan', 'Finance')}:   Market analysis
-${s('t-cyan', 'Shipped')}:   Coval (live)
+${s('t-cyan', 'Shipped')}:   Coval, LearnScope
 ${s('t-cyan', 'Uptime')}:    ${Math.floor(performance.now() / 1000)}s on this page
 ${s('t-cyan', 'Location')}:  ${esc(CONFIG.location)}</div></div>`,
 
@@ -605,7 +605,7 @@ ${s('t-cyan', 'epoch 01')}  class x — 89%`,
 
       projects: () =>
 `${s('t-lime', 'EXP-001')}  Coval — multi-agent code review      ${s('t-lime', '[live]')}
-${s('t-cyan', 'EXP-002')}  LearnScope — watch a network learn   ${s('t-cyan', '[built]')}
+${s('t-lime', 'EXP-002')}  LearnScope — watch a network learn   ${s('t-lime', '[live]')}
 ${s('t-amber', 'EXP-003')}  KernelForge — inference engine       ${s('t-amber', '[in progress]')}
 ${s('t-mag', 'EXP-004')}  Finance-AI — rag assistant           ${s('t-mag', '[in development]')}`,
 
