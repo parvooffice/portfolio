@@ -576,7 +576,7 @@ ${s('t-muted', 'tip: ↑/↓ for history, tab to autocomplete')}`,
       whoami: () =>
 `${s('t-lime', CONFIG.name)} — aspiring AI engineer.
 B.Tech Data Science at VIT Vellore, Class of 2030.
-Building Coval, LearnScope, FinLab, KernelForge and Finance-AI.`,
+Building Coval, LearnScope, FinLab and KernelForge.`,
 
       neofetch: () =>
 `<div class="nf"><pre>${neofetchArt}</pre><div>${s('t-lime', 'guest')}@${s('t-lime', 'pm-ai')}
@@ -595,7 +595,7 @@ ${s('t-cyan', 'Location')}:  ${esc(CONFIG.location)}</div></div>`,
 `${s('t-mag', '[ai/ml]')}    multi-agent systems · rag · langchain · autograd · tensorflow.js
 ${s('t-mag', '[cloud]')}    aws · fastapi inference serving · vercel · c++/cuda (learning)
 ${s('t-mag', '[stack]')}    python · typescript · react · node.js · supabase · git
-${s('t-mag', '[finance]')}  monte carlo · backtesting · walk-forward testing · options basics`,
+${s('t-mag', '[finance]')}  monte carlo · backtesting · walk-forward testing · portfolio projections`,
 
       education: () =>
 `${s('t-cyan', 'epoch 03')}  ${esc(CONFIG.degree)}
@@ -606,8 +606,7 @@ ${s('t-cyan', 'epoch 01')}  class x — 89%`,
 `${s('t-lime', 'EXP-001')}  Coval — multi-agent code review      ${s('t-lime', '[live]')}
 ${s('t-lime', 'EXP-002')}  LearnScope — watch a network learn   ${s('t-lime', '[live]')}
 ${s('t-cyan', 'EXP-003')}  FinLab — finance &amp; strategy lab      ${s('t-cyan', '[v1.0.0]')}
-${s('t-amber', 'EXP-004')}  KernelForge — inference engine       ${s('t-amber', '[in progress]')}
-${s('t-mag', 'EXP-005')}  Finance-AI — rag assistant           ${s('t-mag', '[in development]')}`,
+${s('t-amber', 'EXP-004')}  KernelForge — inference engine       ${s('t-amber', '[in progress]')}`,
 
       contact: () =>
 `${CONFIG.email ? `${s('t-cyan', 'email')}     <a href="mailto:${esc(CONFIG.email)}">${esc(CONFIG.email)}</a>
