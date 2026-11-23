@@ -3,7 +3,6 @@
 Structure:
 - index.html            the website
 - public/images/        your images (see README inside)
-- public/resume/        downloadable resume PDF
 - api/contact.js        Vercel function that saves messages to Supabase
 - supabase/schema.sql   run once in Supabase SQL Editor
 - vite.config.js        makes /api work under `npm run dev`
