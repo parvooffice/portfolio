@@ -10,8 +10,8 @@
     first: 'Prabhudatta',
     roles: [
       'Aspiring AI Engineer',
-      'AWS Certified Solutions Architect',
-      'AWS Certified AI Practitioner',
+      'LLM & RAG builder',
+      'cloud-native AI tinkerer',
       'multi-agent systems builder',
       'where AI meets finance',
     ],
@@ -69,8 +69,8 @@
     const lines = [
       '<span class="ok">[  OK  ]</span> Initializing neural core…',
       '<span class="ok">[  OK  ]</span> Loading weights: prabhudatta-v1.safetensors',
-      '<span class="ok">[  OK  ]</span> Mounting AWS credentials <span class="t-muted">(associate tier)</span>',
-      '<span class="ok">[  OK  ]</span> Verifying certificate: aws_ai_practitioner.pem',
+      '<span class="ok">[  OK  ]</span> Mounting cloud runtime',
+      '<span class="ok">[  OK  ]</span> Loading projects: coval, learnscope, kernelforge',
       '<span class="warn">[ WARN ]</span> Sleep schedule not found — continuing anyway',
       '<span class="ok">[  OK  ]</span> Calibrating curiosity module → 100%',
       '<span class="ok">[  OK  ]</span> Compiling ambition…',
@@ -440,7 +440,7 @@
   function tilt() {
     if (!finePointer || reduce) return;
     $$('.tilt').forEach((el) => {
-      const max = el.classList.contains('cert') ? 12 : 6;
+      const max = 6;
       el.addEventListener('mousemove', (e) => {
         const r = el.getBoundingClientRect();
         const px = (e.clientX - r.left) / r.width, py = (e.clientY - r.top) / r.height;
@@ -564,7 +564,6 @@
   ${s('t-cyan', 'whoami')}        who is this
   ${s('t-cyan', 'neofetch')}      system info, but it's me
   ${s('t-cyan', 'skills')}        loaded weights
-  ${s('t-cyan', 'certs')}         verified credentials
   ${s('t-cyan', 'education')}     training history
   ${s('t-cyan', 'projects')}      experiments in the lab
   ${s('t-cyan', 'experience')}    field deployments
@@ -578,7 +577,6 @@ ${s('t-muted', 'tip: ↑/↓ for history, tab to autocomplete')}`,
       whoami: () =>
 `${s('t-lime', CONFIG.name)} — aspiring AI engineer.
 B.Tech Data Science at VIT Vellore, Class of 2030.
-AWS Certified (Solutions Architect – Associate, AI Practitioner) + Bloomberg BMC.
 Building Coval, LearnScope, KernelForge and Finance-AI.`,
 
       neofetch: () =>
@@ -588,8 +586,8 @@ ${s('t-cyan', 'OS')}:        PM-OS 1.0 (neural kernel)
 ${s('t-cyan', 'Host')}:      ${esc(CONFIG.name)}
 ${s('t-cyan', 'Role')}:      Aspiring AI Engineer
 ${s('t-cyan', 'Campus')}:    VIT Vellore
-${s('t-cyan', 'Cloud')}:     AWS SAA + AI Practitioner
-${s('t-cyan', 'Finance')}:   Bloomberg Market Concepts
+${s('t-cyan', 'Cloud')}:     AWS
+${s('t-cyan', 'Finance')}:   Market analysis
 ${s('t-cyan', 'Shipped')}:   Coval (live)
 ${s('t-cyan', 'Uptime')}:    ${Math.floor(performance.now() / 1000)}s on this page
 ${s('t-cyan', 'Location')}:  ${esc(CONFIG.location)}</div></div>`,
@@ -598,16 +596,10 @@ ${s('t-cyan', 'Location')}:  ${esc(CONFIG.location)}</div></div>`,
 `${s('t-mag', '[ai/ml]')}    multi-agent systems · rag · langchain · autograd · tensorflow.js
 ${s('t-mag', '[cloud]')}    aws · fastapi inference serving · vercel · c++/cuda (learning)
 ${s('t-mag', '[stack]')}    python · typescript · react · node.js · supabase · git
-${s('t-mag', '[finance]')}  market analysis · icp profiling · bloomberg fundamentals`,
-
-      certs: () =>
-`${s('t-lime', '✔')} AWS Certified Solutions Architect – Associate   ${s('t-muted', 'aug 2026')}
-${s('t-lime', '✔')} AWS Certified AI Practitioner                   ${s('t-muted', 'jun 2026')}
-${s('t-lime', '✔')} Bloomberg Market Concepts                       ${s('t-muted', 'oct 2026')}`,
+${s('t-mag', '[finance]')}  market analysis · icp profiling · options basics`,
 
       education: () =>
-`${s('t-cyan', 'epoch 04')}  fine-tuning: aws x2 + bloomberg (2026)
-${s('t-cyan', 'epoch 03')}  ${esc(CONFIG.degree)}
+`${s('t-cyan', 'epoch 03')}  ${esc(CONFIG.degree)}
 ${s('t-cyan', 'epoch 02')}  class xii — 89%
 ${s('t-cyan', 'epoch 01')}  class x — 89%`,
 
@@ -636,7 +628,7 @@ ${s('t-cyan', 'github')}    <a href="${esc(CONFIG.github)}" target="_blank" rel=
       hire: () => `${s('t-amber', 'permission denied.')} try: ${s('t-cyan', 'sudo hire-me')}`,
       resume: () => { setTimeout(() => window.print(), 300); return 'spooling resume.pdf to printer…'; },
       matrix: () => { matrix(); return s('t-lime', 'wake up, neo…'); },
-      ls: () => `${s('t-cyan', 'about.md')}  ${s('t-cyan', 'skills.json')}  ${s('t-mag', 'certs/')}  ${s('t-mag', 'projects/')}  resume.pdf  ${s('t-amber', 'secrets.txt')}`,
+      ls: () => `${s('t-cyan', 'about.md')}  ${s('t-cyan', 'skills.json')}  ${s('t-mag', 'projects/')}  resume.pdf  ${s('t-amber', 'secrets.txt')}`,
       'cat secrets.txt': () => 'the real treasure was the gradients we descended along the way.',
       'cat about.md': () => cmds.whoami(),
       'cat skills.json': () => cmds.skills(),
