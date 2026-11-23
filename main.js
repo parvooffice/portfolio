@@ -70,7 +70,7 @@
       '<span class="ok">[  OK  ]</span> Initializing neural core…',
       '<span class="ok">[  OK  ]</span> Loading weights: prabhudatta-v1.safetensors',
       '<span class="ok">[  OK  ]</span> Mounting cloud runtime',
-      '<span class="ok">[  OK  ]</span> Loading projects: coval, learnscope, kernelforge',
+      '<span class="ok">[  OK  ]</span> Loading projects: coval, learnscope, finlab, kernelforge',
       '<span class="warn">[ WARN ]</span> Sleep schedule not found — continuing anyway',
       '<span class="ok">[  OK  ]</span> Calibrating curiosity module → 100%',
       '<span class="ok">[  OK  ]</span> Compiling ambition…',
@@ -566,7 +566,6 @@
   ${s('t-cyan', 'skills')}        loaded weights
   ${s('t-cyan', 'education')}     training history
   ${s('t-cyan', 'projects')}      experiments in the lab
-  ${s('t-cyan', 'experience')}    field deployments
   ${s('t-cyan', 'contact')}       open a channel
   ${s('t-cyan', 'resume')}        print / save resume as pdf
   ${s('t-cyan', 'sudo hire-me')}  you know you want to
@@ -577,7 +576,7 @@ ${s('t-muted', 'tip: ↑/↓ for history, tab to autocomplete')}`,
       whoami: () =>
 `${s('t-lime', CONFIG.name)} — aspiring AI engineer.
 B.Tech Data Science at VIT Vellore, Class of 2030.
-Building Coval, LearnScope, KernelForge and Finance-AI.`,
+Building Coval, LearnScope, FinLab, KernelForge and Finance-AI.`,
 
       neofetch: () =>
 `<div class="nf"><pre>${neofetchArt}</pre><div>${s('t-lime', 'guest')}@${s('t-lime', 'pm-ai')}
@@ -587,8 +586,8 @@ ${s('t-cyan', 'Host')}:      ${esc(CONFIG.name)}
 ${s('t-cyan', 'Role')}:      Aspiring AI Engineer
 ${s('t-cyan', 'Campus')}:    VIT Vellore
 ${s('t-cyan', 'Cloud')}:     AWS
-${s('t-cyan', 'Finance')}:   Market analysis
-${s('t-cyan', 'Shipped')}:   Coval, LearnScope
+${s('t-cyan', 'Finance')}:   Backtesting + Monte Carlo
+${s('t-cyan', 'Shipped')}:   Coval, LearnScope, FinLab
 ${s('t-cyan', 'Uptime')}:    ${Math.floor(performance.now() / 1000)}s on this page
 ${s('t-cyan', 'Location')}:  ${esc(CONFIG.location)}</div></div>`,
 
@@ -596,7 +595,7 @@ ${s('t-cyan', 'Location')}:  ${esc(CONFIG.location)}</div></div>`,
 `${s('t-mag', '[ai/ml]')}    multi-agent systems · rag · langchain · autograd · tensorflow.js
 ${s('t-mag', '[cloud]')}    aws · fastapi inference serving · vercel · c++/cuda (learning)
 ${s('t-mag', '[stack]')}    python · typescript · react · node.js · supabase · git
-${s('t-mag', '[finance]')}  market analysis · icp profiling · options basics`,
+${s('t-mag', '[finance]')}  monte carlo · backtesting · walk-forward testing · options basics`,
 
       education: () =>
 `${s('t-cyan', 'epoch 03')}  ${esc(CONFIG.degree)}
@@ -606,12 +605,9 @@ ${s('t-cyan', 'epoch 01')}  class x — 89%`,
       projects: () =>
 `${s('t-lime', 'EXP-001')}  Coval — multi-agent code review      ${s('t-lime', '[live]')}
 ${s('t-lime', 'EXP-002')}  LearnScope — watch a network learn   ${s('t-lime', '[live]')}
-${s('t-amber', 'EXP-003')}  KernelForge — inference engine       ${s('t-amber', '[in progress]')}
-${s('t-mag', 'EXP-004')}  Finance-AI — rag assistant           ${s('t-mag', '[in development]')}`,
-
-      experience: () =>
-`${s('t-cyan', 'DEPLOY-01')}  Market Analyst &amp; Assistant Trader (Intern), Savari Sewa
-${s('t-cyan', 'DEPLOY-02')}  E-Sports GFX Manager &amp; SaaS Handler, 3 communities`,
+${s('t-cyan', 'EXP-003')}  FinLab — finance &amp; strategy lab      ${s('t-cyan', '[v1.0.0]')}
+${s('t-amber', 'EXP-004')}  KernelForge — inference engine       ${s('t-amber', '[in progress]')}
+${s('t-mag', 'EXP-005')}  Finance-AI — rag assistant           ${s('t-mag', '[in development]')}`,
 
       contact: () =>
 `${CONFIG.email ? `${s('t-cyan', 'email')}     <a href="mailto:${esc(CONFIG.email)}">${esc(CONFIG.email)}</a>
