@@ -1,356 +1,498 @@
-<!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<!doctype html>
+<html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Portfolio | Developer, Market Analyst, Community Builder</title>
-<meta name="description" content="Early-career developer and market analyst building code platforms, finance AI, and communities with AWS, RAG and fintech.">
-<meta name="theme-color" content="#0A0A12">
-<meta property="og:title" content="Portfolio | Code platforms, finance AI, communities">
-<meta property="og:type" content="website">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-<style>
-/* ===== THEME TOKENS: change colours here ===== */
-:root{--bg:#0A0A12;--surface:rgba(255,255,255,.04);--border:rgba(255,255,255,.1);--text:#EDEDF5;--muted:#9A9AB0;
---violet:#8B5CF6;--cyan:#22D3EE;--lime:#A3E635;--grad:linear-gradient(120deg,var(--violet),var(--cyan));
---head:'Space Grotesk',system-ui,sans-serif;--body:'Inter',system-ui,sans-serif;--mono:'JetBrains Mono',ui-monospace,monospace}
-[data-theme=light]{--bg:#F7F7FC;--surface:rgba(255,255,255,.8);--border:rgba(10,10,30,.12);--text:#14142B;--muted:#4C4C66;--violet:#6D3FE0;--cyan:#0E7C99;--lime:#4D7C0F}
-*{box-sizing:border-box;margin:0}
-html{scroll-behavior:smooth;scroll-padding-top:72px}
-body{background:var(--bg);color:var(--text);font:400 1rem/1.65 var(--body);overflow-x:hidden;transition:background .3s}
-h1,h2,h3{font-family:var(--head);line-height:1.15}
-a{color:inherit}
-:focus-visible{outline:2px solid var(--cyan);outline-offset:3px;border-radius:6px}
-.wrap{max-width:1100px;margin:auto;padding:0 1.5rem}
-section{padding:6rem 0}
-h2{font-size:clamp(1.8rem,4vw,2.6rem);margin-bottom:.6rem}
-.lead{color:var(--muted);max-width:60ch;margin-bottom:2.5rem}
-.mono{font-family:var(--mono);font-size:.8rem}
-.grad-text{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
-#progress{position:fixed;top:0;left:0;height:3px;width:0;background:var(--grad);z-index:100}
-/* NAV */
-nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);background:color-mix(in srgb,var(--bg) 70%,transparent);border-bottom:1px solid var(--border)}
-nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
-.logo{font:700 1.15rem var(--head);text-decoration:none}
-.links{display:flex;gap:1.3rem;align-items:center;list-style:none;padding:0}
-.links a{text-decoration:none;color:var(--muted);font-size:.9rem;transition:color .2s}
-.links a:hover,.links a.active{color:var(--cyan)}
-.icon-btn{background:var(--surface);border:1px solid var(--border);color:var(--text);width:38px;height:38px;border-radius:10px;cursor:pointer;font-size:1rem}
-#burger{display:none}
-@media(max-width:900px){#burger{display:block}.links{position:absolute;top:64px;left:0;right:0;flex-direction:column;padding:1.2rem;background:var(--bg);border-bottom:1px solid var(--border);display:none}.links.open{display:flex}}
-/* BUTTONS + CARDS */
-.btn{display:inline-block;padding:.75rem 1.4rem;border-radius:12px;font-weight:600;text-decoration:none;border:1px solid var(--border);background:var(--surface);cursor:pointer;color:var(--text);font-family:var(--body);font-size:.95rem;transition:transform .2s,box-shadow .2s}
-.btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px -8px var(--violet)}
-.btn.primary{background:var(--grad);color:#0A0A12;border:0}
-.card{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:1.6rem;backdrop-filter:blur(10px);position:relative}
-.tag{display:inline-block;font:500 .72rem var(--mono);padding:.25rem .6rem;border-radius:99px;border:1px solid var(--border);color:var(--cyan);margin:0 .3rem .4rem 0}
-.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s}
-.reveal.in{opacity:1;transform:none}
-/* HERO */
-#hero{min-height:92vh;display:flex;align-items:center;position:relative;padding:4rem 0}
-#bg{position:absolute;inset:0;width:100%;height:100%;z-index:-1}
-.mesh{position:absolute;inset:0;z-index:-2;background:radial-gradient(40% 40% at 20% 30%,rgba(139,92,246,.3),transparent),radial-gradient(35% 35% at 80% 60%,rgba(34,211,238,.22),transparent);animation:drift 14s ease-in-out infinite alternate}
-@keyframes drift{to{transform:scale(1.15) translate(2%,-3%)}}
-h1{font-size:clamp(2.6rem,8vw,5.4rem);letter-spacing:-.02em}
-h1 span{display:inline-block;opacity:0;transform:translateY(40px);animation:up .7s forwards}
-@keyframes up{to{opacity:1;transform:none}}
-.type{font:500 1.2rem var(--mono);color:var(--lime);margin:1rem 0;min-height:1.8rem}
-.type::after{content:"|";animation:blink 1s steps(1) infinite}
-@keyframes blink{50%{opacity:0}}
-.tagline{font-size:1.15rem;color:var(--muted);max-width:50ch}
-.cta{display:flex;gap:.8rem;flex-wrap:wrap;margin:1.8rem 0}
-.social{display:flex;gap:.7rem}
-.social a{display:grid;place-items:center;width:42px;height:42px;border-radius:50%;border:1px solid var(--border);background:var(--surface);transition:.2s}
-.social a:hover{border-color:var(--cyan);box-shadow:0 0 18px var(--cyan)}
-.social svg{width:19px;height:19px;fill:currentColor}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:3rem}
-.stats b{display:block;font:700 2.2rem var(--head)}
-.stats span{color:var(--muted);font-size:.85rem}
-@media(max-width:700px){.stats{grid-template-columns:repeat(2,1fr)}}
-/* ABOUT */
-.about{display:grid;grid-template-columns:1.4fr 1fr;gap:3rem;align-items:center}
-.about p{margin-bottom:1rem;max-width:62ch}
-.avatar{position:relative;width:220px;aspect-ratio:1;border-radius:50%;margin:0 auto 1.5rem;padding:4px;background:var(--grad);box-shadow:0 0 60px -10px var(--violet)}
-.avatar div{width:100%;height:100%;border-radius:50%;background:var(--bg);display:grid;place-items:center;font:700 3.4rem var(--head)}
-.avatar img,.shot img{position:absolute;object-fit:cover;border-radius:inherit}.avatar img{inset:4px;width:calc(100% - 8px);height:calc(100% - 8px)}.shot img{inset:0;width:100%;height:100%}
-.facts dt{color:var(--muted);font-size:.8rem;margin-top:.7rem}
-@media(max-width:800px){.about{grid-template-columns:1fr}}
-/* PROJECTS */
-.proj{display:grid;grid-template-columns:1.1fr 1fr;gap:2rem;margin-bottom:2rem;transform-style:preserve-3d;transition:transform .15s,box-shadow .3s;will-change:transform}
-.proj:hover{box-shadow:0 0 50px -15px var(--violet);border-color:var(--violet)}
-.shot{position:relative;overflow:hidden;min-height:220px;border-radius:12px;border:1px dashed var(--border);display:grid;place-items:center;color:var(--muted);text-align:center;font-size:.85rem;background:linear-gradient(135deg,rgba(139,92,246,.15),rgba(34,211,238,.1))}
-.pcs dt{font:600 .8rem var(--mono);color:var(--violet);margin-top:.7rem}
-.pcs dd{margin:0;font-size:.94rem}
-.badge{display:inline-flex;align-items:center;gap:.4rem;font:500 .75rem var(--mono);color:var(--lime);border:1px solid var(--lime);border-radius:99px;padding:.2rem .7rem}
-.badge i{width:8px;height:8px;border-radius:50%;background:var(--lime);animation:pulse 1.5s infinite}
-@keyframes pulse{0%{box-shadow:0 0 0 0 var(--lime)}100%{box-shadow:0 0 0 10px transparent}}
-@media(max-width:850px){.proj{grid-template-columns:1fr}}
-/* TIMELINE */
-.tl{position:relative;padding-left:2rem;border-left:2px solid var(--border)}
-.tl::before{content:"";position:absolute;left:-2px;top:0;width:2px;height:var(--fill,0%);background:var(--grad)}
-.tl .card{margin-bottom:2rem}
-.tl .card::before{content:"";position:absolute;left:calc(-2rem - 7px);top:1.9rem;width:12px;height:12px;border-radius:50%;background:var(--cyan);box-shadow:0 0 12px var(--cyan)}
-.tl ul{padding-left:1.1rem;margin-top:.6rem}.tl li{margin-bottom:.4rem}
-.meta{color:var(--muted);font-size:.9rem}
-/* SKILLS */
-.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem}
-@media(max-width:800px){.grid2{grid-template-columns:1fr}}
-.bar{margin-top:1rem}.bar div.l{display:flex;justify-content:space-between;font-size:.88rem}
-.bar .t{height:8px;border-radius:9px;background:var(--border);overflow:hidden;margin-top:.3rem}
-.bar .f{height:100%;width:0;background:var(--grad);border-radius:9px;transition:width 1.3s cubic-bezier(.2,.8,.2,1)}
-.soft{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1.8rem}
-/* CERTS */
-.certs{display:flex;gap:1.5rem;overflow-x:auto;padding:1.5rem .2rem;scroll-snap-type:x mandatory}
-.cert{flex:0 0 min(300px,80vw);scroll-snap-align:start}
-.cert.latest{border-color:var(--lime);box-shadow:0 0 40px -12px var(--lime)}
-.cert .btn{margin-top:1rem;padding:.5rem 1rem;font-size:.85rem}
-/* RESUME */
-.paper{max-width:760px;margin:0 auto 1.5rem;background:var(--surface)}
-.paper h3{font-size:1rem;margin:1.2rem 0 .3rem;color:var(--cyan)}
-.paper p,.paper li{font-size:.92rem}.paper ul{padding-left:1.1rem}
-/* CONTACT */
-#contact h2{font-size:clamp(2rem,6vw,3.6rem);background:linear-gradient(90deg,var(--violet),var(--cyan),var(--lime),var(--violet));background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:flow 6s linear infinite}
-@keyframes flow{to{background-position:300% 0}}
-form{display:grid;gap:1rem;position:relative}
-label{font-size:.85rem;color:var(--muted)}
-input,textarea{width:100%;margin-top:.3rem;padding:.8rem 1rem;border-radius:10px;border:1px solid var(--border);background:var(--bg);color:var(--text);font:inherit}
-.err{color:#FB7185;font-size:.8rem;min-height:1rem;display:block}
-.ok{display:none;text-align:center;padding:2rem}
-.ok.show{display:block;animation:up .6s}
-.ok svg{width:64px;stroke:var(--lime);fill:none;stroke-width:4;stroke-dasharray:60;animation:draw .8s forwards}
-@keyframes draw{from{stroke-dashoffset:60}to{stroke-dashoffset:0}}
-.contact{display:grid;grid-template-columns:1.2fr 1fr;gap:2rem}
-@media(max-width:800px){.contact{grid-template-columns:1fr}}
-.direct a{display:block;margin-bottom:.8rem;color:var(--cyan)}
-footer{border-top:1px solid var(--border);padding:2rem 0;color:var(--muted);font-size:.9rem}
-footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
-/* CURSOR */
-#cur{position:fixed;width:34px;height:34px;border-radius:50%;pointer-events:none;z-index:200;background:radial-gradient(circle,rgba(34,211,238,.5),transparent 70%);transform:translate(-50%,-50%);display:none}
-@media(pointer:fine){#cur{display:block}}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}.reveal,h1 span{opacity:1;transform:none}#cur{display:none!important}}
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Prabhudatta Mishra — Aspiring AI Engineer</title>
+  <meta name="description" content="Prabhudatta Mishra: aspiring AI engineer and B.Tech Data Science student at VIT Vellore. AWS Certified Solutions Architect – Associate and AI Practitioner, builder of Coval, LearnScope and KernelForge." />
+  <meta name="theme-color" content="#05060b" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2305060b'/%3E%3Cpath d='M18 46V18h13a9 9 0 0 1 0 18h-7' stroke='%2300f0ff' stroke-width='5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='46' cy='44' r='5' fill='%23ff2bd6'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Space+Grotesk:wght@400;500;600&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
-<div id="progress"></div><div id="cur" aria-hidden="true"></div>
 
-<nav aria-label="Main"><div class="wrap">
-  <a class="logo grad-text" href="#hero" id="logo"></a>
-  <ul class="links" id="links">
-    <li><a href="#about">About</a></li><li><a href="#projects">Projects</a></li><li><a href="#experience">Experience</a></li>
-    <li><a href="#skills">Skills</a></li><li><a href="#certs">Certifications</a></li><li><a href="#resume">Resume</a></li><li><a href="#contact">Contact</a></li>
-  </ul>
-  <div style="display:flex;gap:.5rem">
-    <button class="icon-btn" id="theme" aria-label="Toggle light and dark mode">◐</button>
-    <button class="icon-btn" id="burger" aria-label="Open menu" aria-expanded="false">☰</button>
-  </div>
-</div></nav>
-
-<main>
-<section id="hero"><div class="mesh"></div><canvas id="bg" aria-hidden="true"></canvas>
-<div class="wrap">
-  <p class="mono" style="color:var(--cyan)">Hello, I am</p>
-  <h1 id="name" aria-label=""></h1>
-  <div class="type" id="type" aria-live="off"></div>
-  <p class="tagline" id="tagline"></p>
-  <div class="cta"><a class="btn primary" href="#projects">View Projects</a><a class="btn" id="dl" href="#" target="_blank" rel="noopener">Download Resume</a></div>
-  <div class="social" id="social"></div>
-  <div class="stats">
-    <div><b data-n="2">0</b><span>Major Projects</span></div><div><b data-n="3">0</b><span>Certifications</span></div>
-    <div><b data-n="3">0</b><span>Communities Managed</span></div><div><b data-n="1">0</b><span>Industry Internship</span></div>
-  </div>
-</div></section>
-
-<section id="about"><div class="wrap about">
-  <div class="reveal">
-    <h2>About me</h2>
-    <p>I started by managing esports graphics and tournaments for gaming communities. Running them like small businesses taught me pricing, planning and ownership.</p>
-    <p>That led me to analyse markets, then to build developer and finance platforms. I enjoy AI, cloud (AWS) and fintech, and I am looking for internships and collaborations in software, cloud or fintech.</p>
-  </div>
-  <div class="reveal card">
-    <div class="avatar"><!-- Your photo: save as public/images/avatar/avatar.jpg --><div id="ini" role="img" aria-label="Avatar placeholder"></div><img src="images/avatar/avatar.jpg" alt="Portrait of Prabhudatta Mishra" onerror="this.remove()"></div>
-    <h3>Quick facts</h3>
-    <dl class="facts"><dt>Education</dt><dd id="edu"></dd><dt>Location</dt><dd id="loc"></dd><dt>Focus</dt><dd>AI + Cloud + Finance</dd></dl>
-  </div>
-</div></section>
-
-<section id="projects"><div class="wrap">
-  <h2 class="reveal">Projects</h2><p class="lead reveal">Two platforms that solve real problems for beginners and retail users.</p>
-
-  <article class="card proj reveal tilt">
-    <div>
-      <h3>Coval Solutions</h3><p class="grad-text" style="font-weight:600">Code. Connect. Create.</p>
-      <p class="meta" style="margin:.5rem 0">A code-evaluation and social platform for early-stage developers.</p>
-      <dl class="pcs"><dt>Problem</dt><dd>Beginners lack visibility, honest feedback and the right teammates.</dd>
-      <dt>Solution</dt><dd>Automated code evaluation, a social feed and performance-based team matching.</dd>
-      <dt>Impact</dt><dd>Developers earn recognition, share ideas and form efficient teams.</dd>
-      <dt>Features</dt><dd>Code performance scoring, developer profiles, project feeds, team formation.</dd></dl>
-      <p style="margin-top:1rem"><span class="tag">React</span><span class="tag">Node.js</span><span class="tag">MongoDB</span><span class="tag">Code-execution API</span></p>
-      <a class="btn primary" href="https://github.com/parvooffice/coval-solutions" target="_blank" rel="noopener">View on GitHub</a>
-      <a class="btn" href="#" target="_blank" rel="noopener">Live Demo</a>
+  <!-- ============ BOOT SEQUENCE ============ -->
+  <div id="boot" aria-hidden="true">
+    <div class="boot-inner">
+      <div class="boot-logo">PM<span>.ai</span></div>
+      <pre id="boot-log"></pre>
+      <div class="boot-bar"><i id="boot-fill"></i></div>
+      <div class="boot-meta mono"><span id="boot-pct">0%</span><span>click or press any key to skip</span></div>
     </div>
-    <!-- REPLACE: swap this box with <img src="coval.png" alt="Coval Solutions screenshot"> -->
-    <div class="shot" role="img" aria-label="Coval Solutions screenshot placeholder">Coval Solutions<br>screenshot placeholder<img src="images/projects/coval.png" alt="Coval Solutions screenshot" onerror="this.remove()"></div>
-  </article>
+  </div>
 
-  <article class="card proj reveal tilt">
-    <div>
-      <h3>Finance-AI</h3><p><span class="badge"><i></i>In Development</span></p>
-      <p class="meta" style="margin:.5rem 0">A RAG platform (an AI that answers from trusted documents) for stock options, asset and liability management, and tax returns.</p>
-      <dl class="pcs"><dt>Problem</dt><dd>Retail users find options, balance sheets and tax filing confusing.</dd>
-      <dt>Solution</dt><dd>An AI assistant grounded in finance documents that explains concepts in plain language and guides tax workflows.</dd>
-      <dt>Impact</dt><dd>Clearer decisions and less fear of filing taxes.</dd>
-      <dt>Features</dt><dd>RAG Q&amp;A, options and asset/liability explainers, tax return assistance.</dd></dl>
-      <p style="margin-top:1rem"><span class="tag">Python</span><span class="tag">LangChain</span><span class="tag">Vector DB</span><span class="tag">LLM API</span><span class="tag">AWS</span></p>
-      <a class="btn primary" href="https://github.com/parvooffice/finance-AI" target="_blank" rel="noopener">View on GitHub</a>
-      <a class="btn" href="#" target="_blank" rel="noopener">Live Demo</a>
+  <!-- ============ FX LAYERS ============ -->
+  <div class="fx-noise" aria-hidden="true"></div>
+  <div class="fx-scan" aria-hidden="true"></div>
+  <div class="scroll-progress" aria-hidden="true"></div>
+  <div class="cursor-dot" aria-hidden="true"></div>
+  <div class="cursor-ring" aria-hidden="true"></div>
+  <canvas id="matrix" aria-hidden="true"></canvas>
+  <div class="toast mono" role="status" aria-live="polite"></div>
+
+  <!-- ============ NAV ============ -->
+  <header class="nav" id="nav">
+    <a href="#hero" class="logo">PM<span>.ai</span></a>
+    <nav class="nav-links" id="nav-links">
+      <a href="#about"><em>01</em> model</a>
+      <a href="#skills"><em>02</em> weights</a>
+      <a href="#certs"><em>03</em> certs</a>
+      <a href="#education"><em>04</em> training</a>
+      <a href="#projects"><em>05</em> lab</a>
+      <a href="#experience"><em>06</em> field</a>
+      <a href="#terminal"><em>07</em> shell</a>
+      <a href="#contact"><em>08</em> contact</a>
+    </nav>
+    <div class="nav-status mono"><i></i> open to work</div>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span></button>
+  </header>
+
+  <main>
+    <!-- ============ HERO ============ -->
+    <section id="hero" class="hero">
+      <canvas id="neural" aria-hidden="true"></canvas>
+      <div class="hero-content">
+        <p class="eyebrow mono intro" style="--i:0"><span class="blink">▮</span> SYS.ID // PM-01 — neural profile loaded</p>
+        <h1 class="hero-name">
+          <span class="intro" style="--i:1"><span class="glitch" data-text="PRABHUDATTA">PRABHUDATTA</span></span>
+          <span class="outline intro" style="--i:2">MISHRA<span class="dot">.</span></span>
+        </h1>
+        <p class="hero-role mono intro" style="--i:3">&gt; <span id="typed">Aspiring AI Engineer</span><span class="caret"></span></p>
+        <p class="hero-sub intro" style="--i:4">
+          Aspiring <strong>AI Engineer</strong> and Data Science student at <strong>VIT Vellore</strong>.
+          Double AWS-certified, shipping multi-agent code review, and allergic to models that never leave the notebook.
+        </p>
+        <div class="hero-cta intro" style="--i:5">
+          <a href="#projects" class="btn btn-primary magnetic">Enter the lab <span aria-hidden="true">→</span></a>
+          <a href="#terminal" class="btn btn-ghost magnetic">./open_terminal</a>
+        </div>
+
+        <aside class="hud mono intro" style="--i:6" aria-label="Live status panel">
+          <div class="hud-head"><span>// LIVE TELEMETRY</span><span id="clock">--:--:--</span></div>
+          <div class="hud-row"><span>status</span><b class="t-lime"><i class="pulse"></i>TRAINING</b></div>
+          <div class="hud-row"><span>epoch</span><b id="epoch">0</b></div>
+          <div class="hud-row"><span>loss</span><b id="loss">0.6931</b></div>
+          <div class="hud-row"><span>certs loaded</span><b>3 / 3</b></div>
+          <div class="hud-row"><span>cloud</span><b>AWS ×2 ✓</b></div>
+          <div class="hud-row"><span>target</span><b class="t-mag">AI ENGINEER</b></div>
+          <svg class="spark" id="spark" viewBox="0 0 200 40" preserveAspectRatio="none" aria-hidden="true"><path d="" /></svg>
+        </aside>
+      </div>
+      <a href="#about" class="scroll-hint mono" aria-label="Scroll to about">scroll<span></span></a>
+    </section>
+
+    <!-- ============ MARQUEE ============ -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track" id="marquee">
+        <span>Python</span><b>✦</b><span class="o">AWS</span><b>✦</b><span>RAG</span><b>✦</b>
+        <span class="o">LangChain</span><b>✦</b><span>TensorFlow.js</span><b>✦</b><span class="o">WebGPU</span><b>✦</b>
+        <span>React</span><b>✦</b><span class="o">Node.js</span><b>✦</b><span>FastAPI</span><b>✦</b>
+        <span class="o">Supabase</span><b>✦</b><span>C++ / CUDA</span><b>✦</b><span class="o">Bloomberg</span><b>✦</b>
+      </div>
     </div>
-    <!-- REPLACE: swap this box with <img src="finance-ai.png" alt="Finance-AI screenshot"> -->
-    <div class="shot" role="img" aria-label="Finance-AI screenshot placeholder">Finance-AI<br>screenshot placeholder<img src="images/projects/finance-ai.png" alt="Finance-AI screenshot" onerror="this.remove()"></div>
-  </article>
-  <a class="btn" href="https://github.com/parvooffice" target="_blank" rel="noopener">More on GitHub</a>
-</div></section>
 
-<section id="experience"><div class="wrap">
-  <h2 class="reveal">Experience</h2><p class="lead reveal">Hands-on work in markets and in community operations.</p>
-  <div class="tl" id="tl">
-    <div class="card reveal"><h3>Market Analyst &amp; Assistant Trader (Intern)</h3>
-      <p class="meta">Savari Sewa, taxi booking firm | 1 month</p>
-      <ul><li>Segmented the customer base into key ICP (Ideal Customer Profile) groups.</li>
-      <li>Produced market analysis reports that guided customer targeting.</li>
-      <li>Supported trading and market decisions with daily data summaries.</li></ul></div>
-    <div class="card reveal"><h3>E-Sports GFX Manager &amp; SaaS Handler</h3>
-      <p class="meta">3 mid-tier, self-funded gaming communities</p>
-      <ul><li>Designed graphics and branding for esports events.</li>
-      <li>Ran tournaments end to end, from registration to prizes.</li>
-      <li>Built sustainable fee and payout models and managed the subscription tools.</li></ul></div>
-  </div>
-</div></section>
+    <!-- ============ 01 ABOUT ============ -->
+    <section id="about" class="section">
+      <div class="section-head">
+        <span class="idx">01</span>
+        <h2 class="scramble">Model Card</h2>
+        <p class="kicker mono">// who's running this process</p>
+      </div>
 
-<section id="skills"><div class="wrap">
-  <h2 class="reveal">Skills</h2><p class="lead reveal">Self-rated proficiency. Bars fill as you scroll.</p>
-  <div class="grid2" id="skillgrid"></div>
-  <div class="soft reveal"><span class="tag">Communication</span><span class="tag">Leadership</span><span class="tag">Ownership</span></div>
-</div></section>
+      <div class="about-grid">
+        <div class="about-text reveal">
+          <p class="lead">I'm Prabhudatta — a builder who got hooked on the idea that software can <em>learn</em>.</p>
+          <p>
+            I'm a first-year <strong>B.Tech Data Science</strong> student at <strong>VIT Vellore</strong>, working toward
+            becoming an <strong>AI engineer</strong>. I build agents that review code, tools that show a network learning in
+            real time, and an inference engine that teaches me what GPUs actually do.
+          </p>
+          <p>
+            I hold <strong>two AWS certifications</strong> plus <strong>Bloomberg Market Concepts</strong>, so I think about
+            architecture and market fit alongside the model. I've also run three self-funded gaming communities like small businesses.
+          </p>
+          <ul class="facts mono">
+            <li><span>location</span>Bhubaneswar, India</li>
+            <li><span>studying</span>B.Tech Data Science @ VIT Vellore</li>
+            <li><span>focus</span>AI agents · RAG · ML systems · Cloud</li>
+            <li><span>seeking</span>AI, software, cloud &amp; fintech internships</li>
+          </ul>
+        </div>
 
-<section id="certs"><div class="wrap">
-  <h2 class="reveal">Certifications</h2><p class="lead reveal">One new credential every two months. Scroll sideways.</p>
-  <div class="certs" id="certlist" tabindex="0" aria-label="Certifications timeline"></div>
-</div></section>
+        <div class="model-card reveal">
+          <div class="win-bar"><i></i><i></i><i></i><span>model_card.yaml</span></div>
+<pre class="code"><span class="c"># model_card.yaml — v1.0</span>
+<span class="k">model_name</span>:     <span class="s">prabhudatta-v1</span>
+<span class="k">task</span>:           <span class="s">aspiring_ai_engineer</span>
+<span class="k">base_model</span>:     <span class="s">btech_data_science</span>
+<span class="k">checkpoint</span>:     <span class="s">vit_vellore_2030</span>
+<span class="k">fine_tuned_on</span>:
+  - <span class="s">aws_ai_practitioner</span>
+  - <span class="s">aws_solutions_architect</span>
+  - <span class="s">bloomberg_market_concepts</span>
+<span class="k">eval</span>:
+  <span class="k">class_10</span>:     <span class="n">89%</span>
+  <span class="k">class_12</span>:     <span class="n">89%</span>
+<span class="k">hyperparameters</span>:
+  <span class="k">curiosity</span>:    <span class="n">1.00</span>
+  <span class="k">sleep</span>:        <span class="n">0.30</span>  <span class="c"># under review</span>
+<span class="k">deployment</span>:     <span class="s">aws</span>   <span class="c"># obviously</span>
+<span class="k">license</span>:        <span class="s">open-to-internships</span></pre>
+        </div>
+      </div>
+    </section>
 
-<section id="resume"><div class="wrap">
-  <h2 class="reveal">Resume</h2><p class="lead reveal">A one-page summary.</p>
-  <div class="card paper reveal">
-    <h2 id="rn" style="font-size:1.6rem"></h2><p class="meta" id="rm"></p>
-    <h3>Education</h3><p id="re"></p>
-    <h3>Experience</h3><ul><li>Market Analyst &amp; Assistant Trader (Intern), Savari Sewa</li><li>E-Sports GFX Manager &amp; SaaS Handler, 3 gaming communities</li></ul>
-    <h3>Projects</h3><ul><li>Coval Solutions: code evaluation and social platform</li><li>Finance-AI: RAG finance assistant (in development)</li></ul>
-    <h3>Certifications</h3><ul><li>AWS Certified AI Practitioner</li><li>AWS Certified Solutions Architect – Associate</li><li>Bloomberg Market Concepts</li></ul>
-  </div>
-  <div style="text-align:center"><a class="btn primary" id="pdf" href="#" download>Download PDF</a> <a class="btn" id="pdf2" href="#" target="_blank" rel="noopener">Open in new tab</a></div>
-</div></section>
+    <!-- ============ 02 SKILLS ============ -->
+    <section id="skills" class="section">
+      <div class="section-head">
+        <span class="idx">02</span>
+        <h2 class="scramble">Weights &amp; Biases</h2>
+        <p class="kicker mono">// every parameter, traced to where it was trained</p>
+      </div>
 
-<section id="contact"><div class="wrap">
-  <h2 class="reveal">Let's build something</h2><p class="lead reveal">Open to internships and collaborations in software, cloud and fintech.</p>
-  <div class="contact reveal">
-    <div class="card"><form id="form" novalidate>
-      <div><label for="n">Name</label><input id="n" required autocomplete="name"><span class="err"></span></div>
-      <div><label for="e">Email</label><input id="e" type="email" required autocomplete="email"><span class="err"></span></div>
-      <div><label for="m">Message</label><textarea id="m" rows="4" required></textarea><span class="err"></span></div>
-      <button class="btn primary" type="submit">Send message</button>
-    </form>
-    <div class="ok" id="ok" role="status"><svg viewBox="0 0 52 52"><path d="M10 27l11 11 22-24"/></svg><h3>Message sent</h3><p class="meta">Thanks. I will reply soon.</p></div></div>
-    <div class="card direct" id="direct"><h3 style="margin-bottom:1rem">Direct links</h3></div>
-  </div>
-</div></section>
-</main>
+      <div class="skills-grid stagger">
+        <article class="skill-card reveal tilt">
+          <div class="skill-head"><span class="mono">layer_01</span><h3>AI / ML</h3></div>
+          <ul class="bars">
+            <li style="--v:100"><span>Multi-agent systems</span><b>Coval</b><i></i></li>
+            <li style="--v:100"><span>RAG &amp; LangChain</span><b>Finance-AI</b><i></i></li>
+            <li style="--v:100"><span>Neural nets &amp; autograd</span><b>LearnScope</b><i></i></li>
+            <li style="--v:100"><span>TensorFlow.js on WebGPU</span><b>LearnScope</b><i></i></li>
+          </ul>
+          <ul class="chips mono"><li>Python</li><li>CNNs</li><li>Backprop</li><li>Model evaluation</li></ul>
+        </article>
 
-<footer><div class="wrap"><span id="copy"></span><a class="btn" href="#hero">Back to top</a></div></footer>
+        <article class="skill-card reveal tilt">
+          <div class="skill-head"><span class="mono">layer_02</span><h3>Cloud &amp; Systems</h3></div>
+          <ul class="bars">
+            <li style="--v:100"><span>AWS architecture</span><b>SAA certified</b><i></i></li>
+            <li style="--v:100"><span>Generative AI on AWS</span><b>AIF certified</b><i></i></li>
+            <li style="--v:100"><span>Inference serving (FastAPI)</span><b>KernelForge</b><i></i></li>
+            <li style="--v:100"><span>C++ / CUDA kernels</span><b>learning</b><i></i></li>
+          </ul>
+          <ul class="chips mono"><li>AWS</li><li>Vercel</li><li>Docker</li><li>REST APIs</li></ul>
+        </article>
 
-<script>
-/* ===== EDIT YOUR CONTENT HERE ===== */
-const CONFIG={
-  name:"Prabhudatta Mishra",
-  tagline:"I build code platforms, finance AI, and communities.",
-  roles:["Developer","Market Analyst","Cloud Learner","Community Builder"],
-  education:"VIT Vellore, B.Tech Data Science, 2026", location:"Bhubaneswar",
-  email:"prabhudattamishra600@gmail.com", github:"https://github.com/parvooffice",
-  resumePdf:"resume/Prabhudatta_Mishra_Resume.pdf",
-  certs:[
-    {t:"AWS Certified AI Practitioner",i:"Amazon Web Services",d:"June 2026",n:"How AI and machine learning services work on AWS.",u:"#"},
-    {t:"AWS Certified Solutions Architect – Associate",i:"Amazon Web Services",d:"August 2026",n:"Designing secure, scalable and cost-aware cloud systems.",u:"#"},
-    {t:"Bloomberg Market Concepts (BMC)",i:"Bloomberg",d:"October 2026",n:"How to read markets, economics and financial data.",u:"#",latest:true}],
-  skills:[
-    {g:"Cloud & AI",s:[["AWS (AI Practitioner, SA Associate)",75],["RAG & LLM applications",70],["Python",75]]},
-    {g:"Development",s:[["JavaScript",80],["React",75],["Node.js",70],["Git / GitHub & REST APIs",80]]},
-    {g:"Finance & Analysis",s:[["Market analysis & ICP profiling",80],["Bloomberg Terminal fundamentals",70],["Options & asset/liability basics",70]]},
-    {g:"Creative & Community",s:[["Graphic design (esports GFX)",85],["Tournament operations",90],["Community management & pricing",85]]}]
-};
-/* ================================== */
-const $=s=>document.querySelector(s),C=CONFIG,rm=matchMedia('(prefers-reduced-motion:reduce)').matches;
-document.title=C.name+" | Developer, Market Analyst, Community Builder";
-$('#logo').textContent=C.name.split(' ')[0];
-$('#tagline').textContent=C.tagline;
-$('#name').setAttribute('aria-label',C.name);
-$('#name').innerHTML=C.name.split(' ').map((w,i)=>`<span aria-hidden="true" style="animation-delay:${i*.15}s" class="${i%2?'grad-text':''}">${w}&nbsp;</span>`).join('');
-$('#ini').textContent=C.name.split(' ').map(w=>w[0]).join('').slice(0,2);
-$('#edu').textContent=C.education;$('#loc').textContent=C.location;
-$('#rn').textContent=C.name;$('#rm').textContent=C.email+" | "+C.location;$('#re').textContent=C.education;
-$('#dl').href=$('#pdf').href=$('#pdf2').href=C.resumePdf;
-$('#copy').textContent="© "+new Date().getFullYear()+" "+C.name+". All rights reserved.";
-const ic={github:'<path d="M12 .5a11.5 11.5 0 0 0-3.6 22.4c.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.200.1 1.800 1.200 1.800 1.200 1 1.800 2.700 1.300 3.400 1 .1-.8.4-1.300.7-1.600-2.600-.3-5.300-1.300-5.300-5.700 0-1.300.5-2.300 1.200-3.100-.1-.3-.5-1.500.1-3.100 0 0 1-.3 3.200 1.200a11 11 0 0 1 5.800 0c2.200-1.500 3.200-1.200 3.200-1.200.6 1.600.2 2.800.1 3.100.7.800 1.200 1.800 1.200 3.100 0 4.400-2.700 5.400-5.300 5.700.4.400.8 1.100.8 2.200v3.200c0 .3.2.7.8.6A11.500 11.500 0 0 0 12 .5z"/>',
-linkedin:'<path d="M4.500 8.500h3.600V20H4.500zM6.300 3a2.100 2.100 0 1 1 0 4.200 2.100 2.100 0 0 1 0-4.200zM10 8.500h3.400v1.600c.5-.9 1.700-1.900 3.500-1.900 3.700 0 4.400 2.400 4.400 5.600V20h-3.600v-5.400c0-1.300 0-3-1.800-3s-2.100 1.400-2.100 2.900V20H10z"/>',
-mail:'<path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm9 7L4.500 7v1.500L12 13.500 19.500 8.500V7z"/>'};
-const soc=[["GitHub",C.github,ic.github],["Email","mailto:"+C.email,ic.mail]];
-$('#social').innerHTML=soc.map(([n,u,p])=>`<a href="${u}" aria-label="${n}" ${u.startsWith('http')?'target="_blank" rel="noopener"':''}><svg viewBox="0 0 24 24" aria-hidden="true">${p}</svg></a>`).join('');
-$('#direct').insertAdjacentHTML('beforeend',`<a href="mailto:${C.email}">Email: ${C.email}</a><a href="${C.github}" target="_blank" rel="noopener">GitHub: parvooffice</a>`);
-$('#certlist').innerHTML=C.certs.map(c=>`<article class="card cert reveal ${c.latest?'latest':''}"><span class="mono" style="color:var(--cyan)">${c.d}</span>${c.latest?' <span class="badge">Latest</span>':''}<h3 style="margin:.5rem 0">${c.t}</h3><p class="meta">${c.i}</p><p style="margin-top:.6rem;font-size:.92rem"><b>What I learned:</b> ${c.n}</p></article>`).join('');
-$('#skillgrid').innerHTML=C.skills.map(g=>`<div class="card reveal"><h3>${g.g}</h3>${g.s.map(([n,v])=>`<div class="bar"><div class="l"><span>${n}</span><span class="mono">${v}%</span></div><div class="t" role="progressbar" aria-label="${n}" aria-valuenow="${v}" aria-valuemin="0" aria-valuemax="100"><div class="f" data-w="${v}"></div></div></div>`).join('')}</div>`).join('');
+        <article class="skill-card reveal tilt">
+          <div class="skill-head"><span class="mono">layer_03</span><h3>Full Stack</h3></div>
+          <ul class="bars">
+            <li style="--v:100"><span>React &amp; Vite</span><b>Coval</b><i></i></li>
+            <li style="--v:100"><span>Node.js &amp; Express</span><b>Coval</b><i></i></li>
+            <li style="--v:100"><span>Supabase / Postgres</span><b>Coval</b><i></i></li>
+            <li style="--v:100"><span>TypeScript</span><b>LearnScope</b><i></i></li>
+          </ul>
+          <ul class="chips mono"><li>JavaScript</li><li>Git / GitHub</li><li>Vitest</li><li>Playwright</li></ul>
+        </article>
 
-/* Theme toggle */
-const th=$('#theme');th.onclick=()=>{const d=document.documentElement;d.dataset.theme=d.dataset.theme==='dark'?'light':'dark'};
-/* Mobile menu */
-$('#burger').onclick=e=>{const o=$('#links').classList.toggle('open');e.currentTarget.setAttribute('aria-expanded',o)};
-$('#links').onclick=e=>{if(e.target.tagName==='A')$('#links').classList.remove('open')};
-/* Typewriter */
-(()=>{const el=$('#type');let r=0,i=0,del=false;if(rm){el.textContent=C.roles.join(' • ');return}
-(function t(){const w=C.roles[r];el.textContent=w.slice(0,i);if(!del&&i===w.length){del=true;return setTimeout(t,1400)}
-if(del&&i===0){del=false;r=(r+1)%C.roles.length}i+=del?-1:1;setTimeout(t,del?40:80)})()})();
-/* Reveal, counters, skill bars */
-const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;e.target.classList.add('in');
-e.target.querySelectorAll('.f').forEach(f=>f.style.width=f.dataset.w+'%');io.unobserve(e.target)}),{threshold:.15});
-document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-const co=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;const n=+e.target.dataset.n;let v=0;
-const s=setInterval(()=>{v++;e.target.textContent=v;if(v>=n)clearInterval(s)},rm?1:350);co.unobserve(e.target)}),{threshold:.6});
-document.querySelectorAll('[data-n]').forEach(el=>co.observe(el));
-/* Scroll progress, timeline fill, active nav */
-const secs=[...document.querySelectorAll('main section')],lk=[...document.querySelectorAll('.links a')];
-addEventListener('scroll',()=>{const h=document.documentElement;$('#progress').style.width=(scrollY/(h.scrollHeight-innerHeight)*100)+'%';
-const tl=$('#tl').getBoundingClientRect();$('#tl').style.setProperty('--fill',Math.min(100,Math.max(0,(innerHeight*.7-tl.top)/tl.height*100))+'%');
-let cur='';secs.forEach(s=>{if(s.getBoundingClientRect().top<innerHeight*.4)cur=s.id});
-lk.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+cur))},{passive:true});
-/* 3D tilt */
-if(!rm)document.querySelectorAll('.tilt').forEach(c=>{c.addEventListener('mousemove',e=>{const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
-c.style.transform=`perspective(900px) rotateY(${x*6}deg) rotateX(${-y*6}deg)`});c.addEventListener('mouseleave',()=>c.style.transform='')});
-/* Cursor glow with trail */
-if(!rm){const cu=$('#cur');let x=0,y=0,cx=0,cy=0;addEventListener('mousemove',e=>{x=e.clientX;y=e.clientY});
-(function f(){cx+=(x-cx)*.15;cy+=(y-cy)*.15;cu.style.left=cx+'px';cu.style.top=cy+'px';requestAnimationFrame(f)})()}
-/* Particle background */
-(()=>{if(rm)return;const cv=$('#bg'),g=cv.getContext('2d');let w,h,p=[];
-const rs=()=>{w=cv.width=cv.offsetWidth;h=cv.height=cv.offsetHeight;p=Array.from({length:Math.min(70,w/16)},()=>({x:Math.random()*w,y:Math.random()*h,vx:(Math.random()-.5)*.4,vy:(Math.random()-.5)*.4}))};
-rs();addEventListener('resize',rs);
-(function d(){g.clearRect(0,0,w,h);p.forEach((a,i)=>{a.x=(a.x+a.vx+w)%w;a.y=(a.y+a.vy+h)%h;g.fillStyle='rgba(34,211,238,.7)';g.fillRect(a.x,a.y,2,2);
-for(let j=i+1;j<p.length;j++){const b=p[j],dx=a.x-b.x,dy=a.y-b.y,q=dx*dx+dy*dy;if(q<10000){g.strokeStyle=`rgba(139,92,246,${.25*(1-q/10000)})`;g.beginPath();g.moveTo(a.x,a.y);g.lineTo(b.x,b.y);g.stroke()}}});requestAnimationFrame(d)})()})();
-/* Contact form validation + success */
-$('#form').onsubmit=async e=>{e.preventDefault();let ok=true;
-[['n',v=>v.trim().length>1,'Enter your name.'],['e',v=>/^\S+@\S+\.\S+$/.test(v),'Enter a valid email address.'],['m',v=>v.trim().length>9,'Write at least 10 characters.']].forEach(([id,t,msg])=>{
-const i=$('#'+id),er=i.parentElement.querySelector('.err');const v=t(i.value);er.textContent=v?'':msg;i.setAttribute('aria-invalid',!v);ok=ok&&v});
-if(!ok)return;const b=e.target.querySelector('button');b.disabled=true;b.textContent='Sending...';
-try{const x=await fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:$('#n').value,email:$('#e').value,message:$('#m').value})});
-if(!x.ok)throw 0;$('#form').style.display='none';$('#ok').classList.add('show')}
-catch{b.disabled=false;b.textContent='Send message';$('#m').parentElement.querySelector('.err').textContent='Could not send. Please email me directly.'}};
-</script>
+        <article class="skill-card reveal tilt">
+          <div class="skill-head"><span class="mono">layer_04</span><h3>Finance &amp; Ops</h3></div>
+          <ul class="bars">
+            <li style="--v:100"><span>Market analysis</span><b>Savari Sewa</b><i></i></li>
+            <li style="--v:100"><span>ICP profiling</span><b>Savari Sewa</b><i></i></li>
+            <li style="--v:100"><span>Bloomberg fundamentals</span><b>BMC</b><i></i></li>
+            <li style="--v:100"><span>Tournament operations</span><b>Esports</b><i></i></li>
+          </ul>
+          <ul class="chips mono"><li>Options basics</li><li>Asset / liability</li><li>Graphic design</li><li>Pricing</li></ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ 03 CERTS ============ -->
+    <section id="certs" class="section">
+      <div class="section-head">
+        <span class="idx">03</span>
+        <h2 class="scramble">Earned Credentials</h2>
+        <p class="kicker mono">// achievements unlocked — hover to inspect</p>
+      </div>
+
+      <div class="certs-grid stagger">
+        <article class="cert tilt reveal">
+          <div class="cert-shine"></div>
+          <div class="cert-top mono"><span>CREDENTIAL // 001</span><span class="verified">✔ EARNED</span></div>
+          <div class="cert-badge">
+            <svg viewBox="0 0 100 100" aria-hidden="true">
+              <defs><linearGradient id="hexg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" style="stop-color:var(--cyan)"/><stop offset="1" style="stop-color:var(--mag)"/></linearGradient></defs>
+              <polygon points="50,4 90,27 90,73 50,96 10,73 10,27" fill="rgba(0,240,255,.06)" stroke="url(#hexg)" stroke-width="2.5"/>
+              <polygon points="50,16 80,33 80,67 50,84 20,67 20,33" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="1"/>
+              <text x="50" y="55" text-anchor="middle" font-family="Syne, sans-serif" font-weight="800" font-size="20" fill="#fff">AWS</text>
+              <text x="50" y="68" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="6" style="fill:var(--cyan)" letter-spacing=".6">ASSOCIATE</text>
+            </svg>
+          </div>
+          <h3>AWS Certified<br />Solutions Architect – Associate</h3>
+          <p class="issuer mono">Amazon Web Services</p>
+          <ul class="chips mono"><li>Secure</li><li>Resilient</li><li>High-performing</li><li>Cost-optimized</li></ul>
+          <div class="cert-foot mono"><span>ISSUED</span><span>AUGUST 2026</span></div>
+        </article>
+
+        <article class="cert tilt reveal">
+          <div class="cert-shine"></div>
+          <div class="cert-top mono"><span>CREDENTIAL // 002</span><span class="verified">✔ EARNED</span></div>
+          <div class="cert-badge">
+            <svg viewBox="0 0 100 100" aria-hidden="true">
+              <defs><linearGradient id="hexg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" style="stop-color:var(--mag)"/><stop offset="1" style="stop-color:var(--lime)"/></linearGradient></defs>
+              <polygon points="50,4 90,27 90,73 50,96 10,73 10,27" fill="rgba(0,240,255,.06)" stroke="url(#hexg2)" stroke-width="2.5"/>
+              <polygon points="50,16 80,33 80,67 50,84 20,67 20,33" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="1"/>
+              <text x="50" y="55" text-anchor="middle" font-family="Syne, sans-serif" font-weight="800" font-size="20" fill="#fff">AWS</text>
+              <text x="50" y="68" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="6" style="fill:var(--mag)" letter-spacing=".6">AI PRACTITIONER</text>
+            </svg>
+          </div>
+          <h3>AWS Certified<br />AI Practitioner</h3>
+          <p class="issuer mono">Amazon Web Services</p>
+          <ul class="chips mono"><li>AI &amp; ML fundamentals</li><li>Generative AI</li><li>Foundation models</li><li>Responsible AI</li></ul>
+          <div class="cert-foot mono"><span>ISSUED</span><span>JUNE 2026</span></div>
+        </article>
+
+        <article class="cert tilt reveal">
+          <div class="cert-shine"></div>
+          <div class="cert-top mono"><span>CREDENTIAL // 003</span><span class="verified">✔ EARNED</span></div>
+          <div class="cert-badge">
+            <svg viewBox="0 0 100 100" aria-hidden="true">
+              <defs><linearGradient id="hexg3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" style="stop-color:var(--lime)"/><stop offset="1" style="stop-color:var(--cyan)"/></linearGradient></defs>
+              <polygon points="50,4 90,27 90,73 50,96 10,73 10,27" fill="rgba(0,240,255,.06)" stroke="url(#hexg3)" stroke-width="2.5"/>
+              <polygon points="50,16 80,33 80,67 50,84 20,67 20,33" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="1"/>
+              <text x="50" y="55" text-anchor="middle" font-family="Syne, sans-serif" font-weight="800" font-size="20" fill="#fff">BMC</text>
+              <text x="50" y="68" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="6" style="fill:var(--lime)" letter-spacing=".6">BLOOMBERG</text>
+            </svg>
+          </div>
+          <h3>Bloomberg Market<br />Concepts</h3>
+          <p class="issuer mono">Bloomberg</p>
+          <ul class="chips mono"><li>Economics</li><li>Currencies</li><li>Fixed income</li><li>Equities</li></ul>
+          <div class="cert-foot mono"><span>ISSUED</span><span>OCTOBER 2026</span></div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ 04 EDUCATION ============ -->
+    <section id="education" class="section">
+      <div class="section-head">
+        <span class="idx">04</span>
+        <h2 class="scramble">Training History</h2>
+        <p class="kicker mono">// academia, logged per epoch</p>
+      </div>
+
+      <div class="edu-grid">
+        <ol class="timeline" id="timeline">
+          <li class="reveal">
+            <span class="node"></span>
+            <span class="epoch mono">EPOCH 04 · JUN — OCT 2026</span>
+            <h3>Fine-tuning Phase</h3>
+            <p class="inst">Three certifications in five months</p>
+            <p>AWS Certified AI Practitioner in June, Solutions Architect – Associate in August, and Bloomberg Market Concepts in October.</p>
+            <ul class="chips mono"><li>AWS AIF</li><li>AWS SAA</li><li>Bloomberg BMC</li></ul>
+          </li>
+          <li class="reveal">
+            <span class="node"></span>
+            <span class="epoch mono">EPOCH 03 · 2026 — 2030</span>
+            <h3>B.Tech, Data Science</h3>
+            <p class="inst">VIT Vellore · Class of 2030</p>
+            <p>First year, and the base model everything else is fine-tuned on. Building real projects alongside coursework.</p>
+          </li>
+          <li class="reveal">
+            <span class="node"></span>
+            <span class="epoch mono">EPOCH 02 · CLASS XII</span>
+            <h3>Higher Secondary</h3>
+            <p class="inst">Board examinations · 89%</p>
+            <p>Held the same score across both board exams. Low variance.</p>
+          </li>
+          <li class="reveal">
+            <span class="node"></span>
+            <span class="epoch mono">EPOCH 01 · CLASS X</span>
+            <h3>Secondary School</h3>
+            <p class="inst">Board examinations · 89%</p>
+            <p>Weights randomly initialised. Curiosity set to maximum.</p>
+          </li>
+        </ol>
+
+        <aside class="loss-chart reveal" aria-label="Decorative training chart">
+          <div class="win-bar"><i></i><i></i><i></i><span>training_curve.png</span></div>
+          <svg viewBox="0 0 300 200" id="curve">
+            <g class="grid-lines">
+              <line x1="30" y1="20" x2="30" y2="180"/><line x1="30" y1="180" x2="290" y2="180"/>
+              <line x1="30" y1="60" x2="290" y2="60"/><line x1="30" y1="100" x2="290" y2="100"/><line x1="30" y1="140" x2="290" y2="140"/>
+            </g>
+            <path id="curve-loss" class="curve-loss" d="" />
+            <path id="curve-acc" class="curve-acc" d="" />
+            <circle id="curve-dot" r="4" cx="30" cy="20" />
+            <text x="30" y="196" class="ax">epoch 0</text>
+            <text x="290" y="196" class="ax" text-anchor="end">now</text>
+          </svg>
+          <div class="legend mono">
+            <span><i class="l1"></i>skill_loss</span>
+            <span><i class="l2"></i>knowledge_acc</span>
+            <span class="ep">epoch <b id="curve-ep">0</b>%</span>
+          </div>
+          <p class="caption mono">Fig. 1 — me, over time. (illustrative)</p>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============ 05 PROJECTS ============ -->
+    <section id="projects" class="section">
+      <div class="section-head">
+        <span class="idx">05</span>
+        <h2 class="scramble">The Lab</h2>
+        <p class="kicker mono">// real builds, with their real status</p>
+      </div>
+
+      <div class="proj-grid stagger">
+        <article class="proj reveal tilt">
+          <span class="proj-num">01</span>
+          <div class="proj-top mono"><span>EXP-001</span><span class="chip-status s-lime">● LIVE</span></div>
+          <h3>Coval — Multi-Agent Code Review</h3>
+          <p>A code-review and developer network. Ten specialised agents score a repository on security, performance, readability, test coverage and more, then merge it into one report that powers developer profiles and team formation.</p>
+          <div class="proj-metrics mono"><span><b>10</b>review agents</span><span><b>5</b>repos per run</span></div>
+          <ul class="chips mono"><li>React</li><li>Vite</li><li>Express</li><li>Supabase</li><li>FastAPI</li><li>LLM API</li></ul>
+          <div class="proj-links mono"><a class="proj-link" href="https://coval-solutions-w92u.vercel.app/" target="_blank" rel="noopener">live site ↗</a><a class="proj-link" href="https://github.com/parvooffice/coval-solutions" target="_blank" rel="noopener">repo ↗</a></div>
+        </article>
+
+        <article class="proj reveal tilt">
+          <span class="proj-num">02</span>
+          <div class="proj-top mono"><span>EXP-002</span><span class="chip-status s-cyan">◆ BUILT</span></div>
+          <h3>LearnScope — Watch a Network Learn</h3>
+          <p>Trains neural networks in the browser on WebGPU and shows every weight, activation and gradient live. Rewind to any training step, and let a rule-based Model Doctor diagnose what broke. Includes a from-scratch autograd engine.</p>
+          <div class="proj-metrics mono"><span><b>≈2,100</b>img/s on MNIST</span><span><b>96%</b>test accuracy</span><span><b>91</b>tests</span></div>
+          <ul class="chips mono"><li>TypeScript</li><li>React 19</li><li>TensorFlow.js</li><li>WebGPU</li><li>Web Workers</li></ul>
+        </article>
+
+        <article class="proj reveal tilt">
+          <span class="proj-num">03</span>
+          <div class="proj-top mono"><span>EXP-003</span><span class="chip-status s-amber">◌ IN PROGRESS</span></div>
+          <h3>KernelForge — Inference Engine</h3>
+          <p>A deep-learning inference engine from scratch: hand-written C++/CUDA kernels, a hardened model loader and a FastAPI server with dynamic batching. Measured on CPU so far; the GPU kernels are still waiting on their first real-GPU run.</p>
+          <div class="proj-metrics mono"><span><b>2,190 → 3,322</b>req/s with batching (CPU)</span></div>
+          <ul class="chips mono"><li>C++</li><li>CUDA</li><li>Python</li><li>FastAPI</li><li>PyTorch export</li></ul>
+          <div class="proj-links mono"><a class="proj-link" href="https://github.com/parvooffice/watch-it-learn-" target="_blank" rel="noopener">view repo ↗</a></div>
+        </article>
+
+        <article class="proj reveal tilt">
+          <span class="proj-num">04</span>
+          <div class="proj-top mono"><span>EXP-004</span><span class="chip-status s-mag">✦ IN DEVELOPMENT</span></div>
+          <h3>Finance-AI — RAG Assistant</h3>
+          <p>A RAG-based assistant that explains stock options and asset/liability management in plain language, with guided workflows for tax return assistance.</p>
+          <ul class="chips mono"><li>Python</li><li>LangChain</li><li>Vector DB</li><li>LLM API</li><li>AWS</li></ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ 06 EXPERIENCE ============ -->
+    <section id="experience" class="section">
+      <div class="section-head">
+        <span class="idx">06</span>
+        <h2 class="scramble">Field Deployments</h2>
+        <p class="kicker mono">// where the model met production</p>
+      </div>
+
+      <div class="proj-grid stagger">
+        <article class="proj reveal tilt">
+          <div class="proj-top mono"><span>DEPLOY-01</span><span class="chip-status s-cyan">INTERNSHIP · 1 MONTH</span></div>
+          <h3>Market Analyst &amp; Assistant Trader</h3>
+          <p class="inst">Savari Sewa</p>
+          <ul class="duties">
+            <li>Segmented the customer base into key Ideal Customer Profile groups.</li>
+            <li>Produced market analysis reports that guided customer targeting.</li>
+            <li>Supported trading and market decisions with data summaries.</li>
+          </ul>
+        </article>
+
+        <article class="proj reveal tilt">
+          <div class="proj-top mono"><span>DEPLOY-02</span><span class="chip-status s-mag">3 COMMUNITIES</span></div>
+          <h3>E-Sports GFX Manager &amp; SaaS Handler</h3>
+          <p class="inst">Self-funded gaming communities</p>
+          <ul class="duties">
+            <li>Designed graphics and branding for esports events.</li>
+            <li>Ran tournaments end to end, from registration to prizes.</li>
+            <li>Built sustainable fee and payout models and managed subscription tools.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ 07 TERMINAL ============ -->
+    <section id="terminal" class="section">
+      <div class="section-head">
+        <span class="idx">07</span>
+        <h2 class="scramble">Shell Access</h2>
+        <p class="kicker mono">// type 'help' — yes, it actually works</p>
+      </div>
+
+      <div class="term reveal" id="term">
+        <div class="win-bar"><i></i><i></i><i></i><span>guest@pm-ai: ~</span></div>
+        <div class="term-body" id="term-body">
+          <div id="term-out"></div>
+          <label class="term-line"><span class="prompt">guest@pm-ai:~$</span><input id="term-in" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Terminal command input" /></label>
+        </div>
+      </div>
+      <div class="term-hints mono reveal">
+        <span>try →</span>
+        <button data-cmd="whoami">whoami</button>
+        <button data-cmd="neofetch">neofetch</button>
+        <button data-cmd="certs">certs</button>
+        <button data-cmd="sudo hire-me">sudo hire-me</button>
+        <button data-cmd="matrix">matrix</button>
+      </div>
+    </section>
+
+    <!-- ============ 08 CONTACT ============ -->
+    <section id="contact" class="section contact">
+      <div class="section-head">
+        <span class="idx">08</span>
+        <h2 class="scramble">Open a Channel</h2>
+        <p class="kicker mono">// handshake protocol: friendly</p>
+      </div>
+
+      <p class="contact-big reveal">Let's build something <span class="grad">intelligent</span>.</p>
+      <p class="contact-sub reveal">Internships in AI, software, cloud or fintech, collaborations, hackathons — my inbox is an open port.</p>
+
+      <!-- Posts to /api/contact, which saves the message to Supabase -->
+      <form class="contact-form reveal" id="contact-form" novalidate>
+        <div class="win-bar"><i></i><i></i><i></i><span>send_message.sh</span></div>
+        <div class="form-fields">
+          <div class="field">
+            <label class="mono" for="cf-name">name</label>
+            <input id="cf-name" name="name" type="text" autocomplete="name" maxlength="100" required />
+            <span class="err mono" role="alert"></span>
+          </div>
+          <div class="field">
+            <label class="mono" for="cf-email">email</label>
+            <input id="cf-email" name="email" type="email" autocomplete="email" maxlength="200" required />
+            <span class="err mono" role="alert"></span>
+          </div>
+          <div class="field field-wide">
+            <label class="mono" for="cf-message">message</label>
+            <textarea id="cf-message" name="message" rows="5" maxlength="2000" required></textarea>
+            <span class="err mono" role="alert"></span>
+          </div>
+          <div class="form-actions field-wide">
+            <button class="btn btn-primary" type="submit">Transmit message <span aria-hidden="true">→</span></button>
+            <p class="form-error mono" role="alert"></p>
+          </div>
+        </div>
+        <div class="form-sent" tabindex="-1" hidden>
+          <b class="mono">✔ TRANSMISSION RECEIVED</b>
+          <p>Thanks for reaching out. I'll get back to you soon.</p>
+        </div>
+      </form>
+
+      <!-- Links also live in CONFIG at the top of main.js -->
+      <div class="contact-links stagger">
+        <a class="clink reveal" data-link="email" href="mailto:parvo.office@gmail.com"><span class="mono">email</span><b>parvo.office@gmail.com</b><i>↗</i></a>
+        <a class="clink reveal" data-link="linkedin" href="https://www.linkedin.com/in/prabhudatta-mishra-35623644a/" target="_blank" rel="noopener"><span class="mono">linkedin</span><b>/in/prabhudatta-mishra</b><i>↗</i></a>
+        <a class="clink reveal" data-link="github" href="https://github.com/parvooffice" target="_blank" rel="noopener"><span class="mono">github</span><b>@parvooffice</b><i>↗</i></a>
+        <button class="clink reveal" id="print-resume" type="button"><span class="mono">resume</span><b>download .pdf</b><i>↓</i></button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer mono">
+    <span>© <span id="year">2026</span> Prabhudatta Mishra</span>
+    <span>compiled with caffeine &amp; curiosity · v1.0.0</span>
+    <span class="hint">psst — ↑ ↑ ↓ ↓ ← → ← → B A</span>
+  </footer>
+
+  <script type="module" src="main.js"></script>
 </body>
 </html>
